@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.demo.mapper.ai.MesMapper">
+    
+  <resultMap id="viewMapping" type="com.lihuanda.swagger.vo.ai.MesVO">
+    <result column="AID" jdbcType="VARCHAR" property="id" />
+    <result column="WZNR" jdbcType="VARCHAR" property="content" />
+    <result column="WJMC" jdbcType="VARCHAR" property="voiceFileName" />
+    <result column="SCSJ" jdbcType="VARCHAR" property="requestTime" />
+    <result column="SBJG" jdbcType="VARCHAR" property="isRecognize" />
+    <result column="CLZT" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  
+  <!-- 查询ai消息信息 -->
+  <select id="query" resultMap="viewMapping" parameterType="com.lihuanda.swagger.dto.ai.MesDTO">
+    SELECT AID,WZNR,WJMC,SCSJ,SBJG,CLZT FROM LY_DMXY 
+    WHERE 1=1 
+  </select>
+  
+  
+  
+</mapper>

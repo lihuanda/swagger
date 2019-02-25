@@ -1,0 +1,101 @@
+spring :   
+  profiles:
+    active: pro    
+  application:
+    name: ly-demo-user-svc     
+  mvc: 
+    throw-exception-if-no-handler-found : true 
+  http:
+    encoding:
+     charset: UTF-8
+    multipart:
+     maxFileSize: 50Mb
+     maxRequestSize: 100Mb
+
+  rabbitmq:
+     host: 127.0.0.1
+     port: 5672
+     username: guest
+     password: guest
+     listener:
+       concurrency: 10  #这三个参数主要用于并发量的配置：消费者并发的初始化值；消费者并发的最大值，每个消费者每次监听可拉取处理的消息数量
+       max-concurrency: 20
+       prefetch: 5
+          
+#server :
+#  port : 7001
+#  tomcat :
+#  uri-encoding : UTF-8
+
+server:
+  port: 8082
+
+management:
+  port: 54001
+  health:
+    db:
+      enabled: true
+    mail:
+      enabled: true
+  security:
+    enabled: false
+
+
+info:
+  app:
+    name: "@project.name@" #从pom.xml中获取
+    description: "@project.description@"
+    version: "@project.version@"
+    spring-boot-version: "@project.parent.version@"
+
+
+   
+#mybatis配置       
+mybatis-plus: 
+  typeAliasesPackage : com.lihuanda.swagger.entity.*
+  mapperLocations : classpath:mapper/*/*Mapper.xml  # mapper必须是在mapper目录的下一级目录中 否则报错
+    # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false   
+  global-config:
+      # 数据库相关配置
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: 3
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: 1
+      
+logging:
+   level:
+       com.lihuanda.swagger.mapper: DEBUG
+
+#公共变量
+#文件存放的地址
+file.PathWindows: d:/file
+file.PathLinux: /root/file
+
+
+
+basic:
+   info:
+     mq:
+      exchange.name:  local:basic:info:mq:exchange
+      routing.key.name:  local:basic:info:mq:routing:key
+      queue.name:  local:basic:info:mq:queue
+
+
+log:
+   system:
+     queue.name:  local:log:system:queue
+     exchange.name:  local:log:system:exchange
+     routing.key.name:  local:log:system:routing:key
+   user:
+     queue.name:  local:log:user:queue
+     exchange.name:  local:log:user:exchange
+     routing.key.name:  local:log:user:routing:key
+
+
+mail:
+    queue.name: local.mail.queue
+    exchange.name: local.mail.exchange
+    routing.key.name: local.mail.routing.key

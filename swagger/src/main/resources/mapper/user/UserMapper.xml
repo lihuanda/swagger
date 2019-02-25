@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihuanda.swagger.mapper.user.UserMapper">
+    
+  <resultMap id="viewMapping" type="com.lihuanda.swagger.vo.user.UserVO">
+    <result column="YHBH" jdbcType="VARCHAR" property="userId" />
+    <result column="YHZH" jdbcType="VARCHAR" property="userName" />
+    <result column="YHMC" jdbcType="VARCHAR" property="fullName" />
+    <result column="YHMM" jdbcType="VARCHAR" property="email" />
+    <result column="XB" jdbcType="VARCHAR" property="telephone" />
+    <result column="ZW" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  
+  <!-- 查询用户信息 -->
+  <select id="query" resultMap="viewMapping" >
+    SELECT YHBH, "YHZH", YHMC, YHMM, XB, ZW
+    FROM LY_XTGL_YHB
+    WHERE 1=1
+    <if test="param.userName != null and param.userName != ''">
+        AND YHZH  like  concat('%',concat(#{param.userName},'%'))
+    </if>
+    <if test="param.fullName != null and param.fullName != ''">
+        AND YHXM like '%'||${param.fullName}||'%'
+    </if>
+  </select>
+  
+  
+  
+</mapper>

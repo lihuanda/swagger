@@ -1,0 +1,16 @@
+spring :        
+  #oracle数据库配置
+#  datasource:
+#      url : jdbc:oracle:thin:@192.168.30.60:1521/orclpdb
+#      username : LY_MSSP
+#      password : LY_MSSP
+#      driver-class-name : oracle.jdbc.driver.OracleDriver
+#      max-idle : 10
+              
+  datasource:
+      url : jdbc:oracle:thin:@192.168.6.234:1521/orcl
+      username : C##TRMP
+      password : C##TRMP
+      driver-class-name : oracle.jdbc.driver.OracleDriver
+      max-idle : 10
+
